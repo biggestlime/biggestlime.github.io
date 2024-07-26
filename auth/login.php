@@ -4,8 +4,8 @@ if ( ! isset( $_POST['submitted'] ) )
 header('Location: ' . $_SERVER['HTTP_REFERER']);
 
 $credentials = [
-    'email' => 'caro',
-    'password' => 'caro'
+    'email' => 'root',
+    'password' => 'root'
 ];
 
 if ( $credentials['email'] !== $_POST['email'] OR $credentials['password'] !== $_POST['password'] )
