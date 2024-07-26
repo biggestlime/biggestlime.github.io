@@ -1,20 +1,26 @@
 <?php
 
-if ( ! isset( $_POST['submitted'] ) )
-header('Location: ' . $_SERVER['HTTP_REFERER']);
-
+// Email ve password bilgilerini şifrelemek için daha güvenli yöntemler kullanın
 $credentials = [
-    'email' => 'root',
-    'password' => 'root'
+    'email' => 'caro',
+    'password' => password_hash('caro', PASSWORD_DEFAULT)
 ];
 
-if ( $credentials['email'] !== $_POST['email'] OR $credentials['password'] !== $_POST['password'] )
+if ( ! isset( $_GET['submitted'] ) )
+{
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    exit();
+}
+
+if ( $credentials['email'] !== $_GET['email'] OR ! password_verify($_GET['password'], $credentials['password']) )
 {    
     header('Location: ' . $_SERVER['HTTP_REFERER']);
     exit();
 }
 
+// Session ID'sini rastgele ve güvenli bir şekilde oluşturun
 session_start();
+session_regenerate_id();
 
 // Storing session data
 $_SESSION["isLogged"] = "1";
